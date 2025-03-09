@@ -9,11 +9,10 @@ namespace ACadSharp.Examples
 {
 	class Program
 	{
-		const string _file = "../../../../../samples/sample_AC1032.dwg";
-
 		static void Main(string[] args)
 		{
 			CadDocument doc;
+			string _file = args[0];
 			using (DwgReader reader = new DwgReader(_file))
 			{
 				doc = reader.Read();
