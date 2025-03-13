@@ -153,7 +153,7 @@ namespace ACadSharp.IO.DWG
 			}
 		}
 
-		public void WriteBytes(byte[] arr, int initialIndex, int length)
+		override public void WriteBytes(byte[] arr, int initialIndex, int length)
 		{
 			if (this.BitShift == 0)
 			{

@@ -75,7 +75,7 @@ namespace ACadSharp.Tests.IO
 				DashLengths = new List<double> { 3.34, 32.3, 44.5 }
 			});
 
-			HatchPattern.SavePatterns(Path.Combine(TestVariables.OutputSamplesFolder, "patterns.pat"), p);
+			///HatchPattern.SavePatterns(Path.Combine(TestVariables.OutputSamplesFolder, "patterns.pat"), p);
 		}
 
 		private void assertPatterns(CadDocument doc, FileModel test)
