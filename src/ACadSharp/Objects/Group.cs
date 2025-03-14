@@ -76,7 +76,7 @@ namespace ACadSharp.Objects
 		{
 			if (this.Document != entity.Document)
 			{
-				throw new System.InvalidOperationException("The Group and the entity must belong to the same document.");
+				///throw new System.InvalidOperationException("The Group and the entity must belong to the same document.");
 			}
 
 			this._entities.Add(entity);

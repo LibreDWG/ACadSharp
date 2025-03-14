@@ -1,4 +1,5 @@
 ﻿using ACadSharp.Entities;
+using ACadSharp.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,8 @@ namespace ACadSharp.Objects.Collections
 			{
 				if (e.Document != this._dictionary.Document)
 				{
-					throw new InvalidOperationException("Entities in a group must be in the same document as the group being added.");
+					//throw new InvalidOperationException("");
+					//this.triggerNotification($"Entities in a group must be in the same document as the group being added.", NotificationType.Warning);
 				}
 			}
 
