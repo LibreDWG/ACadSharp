@@ -2,6 +2,7 @@
 using ACadSharp.Tests.Common;
 using CSMath;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
 
 namespace ACadSharp.Tests.Entities
@@ -11,6 +12,14 @@ namespace ACadSharp.Tests.Entities
 		[Fact]
 		public void CreateFromBulgeTest()
 		{
+			bool isLinux = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+			bool isNetFramework =
+#if NETFRAMEWORK
+			    true;
+#else
+			    false;
+#endif
+			bool needsFixZero = isLinux || isNetFramework;
 			XY start = new XY(1, 0);
 			XY end = new XY(0, 1);
 			// 90 degree bulge
@@ -18,18 +27,16 @@ namespace ACadSharp.Tests.Entities
 
 			XY center = Arc.GetCenter(start, end, bulge, out double radius);
 
-#if NETFRAMEWORK
-			center = MathHelper.FixZero(center);
-#endif
+			if (needsFixZero)
+				center = MathHelper.FixZero(center);
 
 			Assert.Equal(XY.Zero, center);
 			Assert.Equal(1, radius, TestVariables.DecimalPrecision);
 
 			Arc arc = Arc.CreateFromBulge(start, end, bulge);
 
-#if NETFRAMEWORK
-			arc.Center = MathHelper.FixZero(arc.Center);
-#endif
+			if (needsFixZero)
+				arc.Center = MathHelper.FixZero(arc.Center);
 
 			Assert.Equal(XYZ.Zero, arc.Center);
 			Assert.Equal(1, arc.Radius, TestVariables.DecimalPrecision);
@@ -53,6 +60,14 @@ namespace ACadSharp.Tests.Entities
 		[Fact]
 		public void GetCenter()
 		{
+			bool isLinux = RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+			bool isNetFramework =
+#if NETFRAMEWORK
+			    true;
+#else
+			    false;
+#endif
+			bool needsFixZero = isLinux || isNetFramework;
 			XY start = new XY(1, 0);
 			XY end = new XY(0, 1);
 			// 90 degree bulge
@@ -60,17 +75,15 @@ namespace ACadSharp.Tests.Entities
 
 			XY center = Arc.GetCenter(start, end, bulge);
 
-#if NETFRAMEWORK
-			center = MathHelper.FixZero(center);
-#endif
+			if (needsFixZero)
+				center = MathHelper.FixZero(center);
 
 			Assert.Equal(XY.Zero, center);
 
 			Arc arc = Arc.CreateFromBulge(start, end, bulge);
 
-#if NETFRAMEWORK
-			arc.Center = MathHelper.FixZero(arc.Center);
-#endif
+			if (needsFixZero)
+				arc.Center = MathHelper.FixZero(arc.Center);
 
 			Assert.Equal(XYZ.Zero, arc.Center);
 			Assert.Equal(1, arc.Radius, TestVariables.DecimalPrecision);
