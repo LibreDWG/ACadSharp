@@ -9,16 +9,34 @@ namespace ACadSharp.Examples
 {
 	class Program
 	{
+		/// <summary>
+		/// Explore a dwg or dxf file
+		/// </summary>
 		static void Main(string[] args)
 		{
 			CadDocument doc;
-			string _file = args[0];
-			using (DwgReader reader = new DwgReader(_file))
-			{
-				doc = reader.Read();
+			string file;
+			if (args.Length == 0) {
+			    Console.WriteLine(".dwg or .dxf argument missing");
+			    Environment.Exit(1);
 			}
-
-			exploreDocument(doc);
+			file = args[0];
+			if (file.EndsWith(".dwg", StringComparison.OrdinalIgnoreCase))
+			{
+			    using (DwgReader reader = new DwgReader(file))
+			    {
+				doc = reader.Read();
+			    }
+			    exploreDocument(doc);
+			}
+			else if (file.EndsWith(".dxf", StringComparison.OrdinalIgnoreCase))
+			{
+			    using (DxfReader reader = new DxfReader(file))
+			    {
+				doc = reader.Read();
+			    }
+			    exploreDocument(doc);
+			}
 		}
 
 		/// <summary>
