@@ -59,9 +59,19 @@ namespace ACadSharp.Examples
 			{
 				Console.WriteLine($"\tName: {item.Name}");
 
-				if (item.Name == BlockRecord.ModelSpaceName && item is BlockRecord model)
+				if (item.Name.Equals(BlockRecord.PaperSpaceName, StringComparison.OrdinalIgnoreCase)
+				    && item is BlockRecord pmodel)
 				{
-					Console.WriteLine($"\t\tEntities in the model:");
+					Console.WriteLine($"\t\tPaperSpace Entities:");
+					foreach (var e in pmodel.Entities.GroupBy(i => i.GetType().FullName))
+					{
+						Console.WriteLine($"\t\t{e.Key}: {e.Count()}");
+					}
+				}
+				if (item.Name.Equals(BlockRecord.ModelSpaceName, StringComparison.OrdinalIgnoreCase)
+				    && item is BlockRecord model)
+				{
+					Console.WriteLine($"\t\tModelSpace Entities:");
 					foreach (var e in model.Entities.GroupBy(i => i.GetType().FullName))
 					{
 						Console.WriteLine($"\t\t{e.Key}: {e.Count()}");
