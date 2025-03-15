@@ -1,4 +1,5 @@
 ﻿using ACadSharp.IO;
+using ACadSharp.Examples.Common;
 using ACadSharp.Tables;
 using ACadSharp.Tables.Collections;
 using System;
@@ -25,6 +26,7 @@ namespace ACadSharp.Examples
 			{
 			    using (DwgReader reader = new DwgReader(file))
 			    {
+				reader.OnNotification += NotificationHelper.LogConsoleNotification;
 				doc = reader.Read();
 			    }
 			    exploreDocument(doc);
@@ -33,6 +35,7 @@ namespace ACadSharp.Examples
 			{
 			    using (DxfReader reader = new DxfReader(file))
 			    {
+				reader.OnNotification += NotificationHelper.LogConsoleNotification;
 				doc = reader.Read();
 			    }
 			    exploreDocument(doc);
