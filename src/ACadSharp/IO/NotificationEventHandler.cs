@@ -10,9 +10,10 @@ namespace ACadSharp.IO
 	{
 		NotImplemented = -1,
 		None = 0,
-		NotSupported = 1,
-		Warning = 2,
-		Error = 3,
+		Info = 1,
+		NotSupported = 2,
+		Warning = 3,
+		Error = 4,
 	}
 
 	public class NotificationEventArgs : EventArgs

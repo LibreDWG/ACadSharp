@@ -966,14 +966,14 @@ namespace ACadSharp.IO
 
 			//0x18	4	SecurityType (long), see R2004 meta data, the definition is the same, paragraph 4.1.
 			fileheader.SecurityType = sreader.ReadRawLong();
-			//0x1C	4	Unknown long
+			//0x1C	4	Unknown Address
 			sreader.ReadRawLong();
 			//0x20	4	Summary info Address in stream
 			fileheader.SummaryInfoAddr = sreader.ReadRawLong();
 			//0x24	4	VBA Project Addr(0 if not present)
 			fileheader.VbaProjectAddr = sreader.ReadRawLong();
 
-			//0x28	4	0x00000080
+			//0x28	4	0x00000080 r2004_header_address (always 128)
 			sreader.ReadRawLong();
 
 			//0x2C	4	App info Address in stream
