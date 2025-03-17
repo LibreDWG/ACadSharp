@@ -59,7 +59,7 @@ namespace ACadSharp.IO.DWG
 			ulong offset = 0uL;
 			for (int i = 0; i < nlocalSections; i++)
 			{
-				this.craeteLocalSection(
+				this.createLocalSection(
 					descriptor,
 					buffer,
 					(int)descriptor.DecompressedSize,
@@ -72,7 +72,7 @@ namespace ACadSharp.IO.DWG
 			int spearBytes = (int)(stream.Length % (int)descriptor.DecompressedSize);
 			if (spearBytes > 0 && !checkEmptyBytes(buffer, offset, (ulong)spearBytes))
 			{
-				this.craeteLocalSection(
+				this.createLocalSection(
 					descriptor,
 					buffer,
 					(int)descriptor.DecompressedSize,
@@ -82,7 +82,7 @@ namespace ACadSharp.IO.DWG
 			}
 		}
 
-		protected virtual void craeteLocalSection(DwgSectionDescriptor descriptor, byte[] buffer, int decompressedSize, ulong offset, int totalSize, bool isCompressed)
+		protected virtual void createLocalSection(DwgSectionDescriptor descriptor, byte[] buffer, int decompressedSize, ulong offset, int totalSize, bool isCompressed)
 		{
 			MemoryStream descriptorStream = this.applyCompression(buffer, decompressedSize, offset, totalSize, isCompressed);
 
