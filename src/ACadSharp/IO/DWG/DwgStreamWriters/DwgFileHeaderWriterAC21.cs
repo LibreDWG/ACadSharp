@@ -13,7 +13,7 @@ namespace ACadSharp.IO.DWG
 		{
 		}
 
-		protected override void craeteLocalSection(DwgSectionDescriptor descriptor, byte[] buffer, int decompressedSize, ulong offset, int totalSize, bool isCompressed)
+		protected override void createLocalSection(DwgSectionDescriptor descriptor, byte[] buffer, int decompressedSize, ulong offset, int totalSize, bool isCompressed)
 		{
 			MemoryStream descriptorStream = this.applyCompression(buffer, decompressedSize, offset, totalSize, isCompressed);
 

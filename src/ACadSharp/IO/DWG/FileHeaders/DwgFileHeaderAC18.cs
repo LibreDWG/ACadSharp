@@ -38,7 +38,7 @@ namespace ACadSharp.IO.DWG
 
 		public uint SectionArrayPageSize { get; set; }
 
-		public int RigthGap { get; set; }
+		public int RightGap { get; set; }
 
 		public int LeftGap { get; set; }
 

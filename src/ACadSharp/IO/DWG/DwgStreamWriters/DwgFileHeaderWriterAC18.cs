@@ -366,7 +366,7 @@ namespace ACadSharp.IO.DWG
 			//0x1C	4	Lowermost left tree node gap
 			swriter.Write<int>(this._fileHeader.LeftGap);
 			//0x20	4	Lowermost right tree node gap
-			swriter.Write<int>(this._fileHeader.RigthGap);
+			swriter.Write<int>(this._fileHeader.RightGap);
 			//0x24	4	Unknown long(ODA writes 1)	
 			swriter.Write<int>(1);
 			//0x28	4	Last section page Id

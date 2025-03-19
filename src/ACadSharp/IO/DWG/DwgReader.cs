@@ -519,7 +519,7 @@ namespace ACadSharp.IO
 			//0x1C	4	Lowermost left tree node gap
 			fileheader.LeftGap = headerStream.ReadInt<LittleEndianConverter>();
 			//0x20	4	Lowermost right tree node gap
-			fileheader.RigthGap = headerStream.ReadInt<LittleEndianConverter>();
+			fileheader.RightGap = headerStream.ReadInt<LittleEndianConverter>();
 			//0x24	4	Unknown long(ODA writes 1)	
 			headerStream.ReadInt<LittleEndianConverter>();
 			//0x28	4	Last section page Id

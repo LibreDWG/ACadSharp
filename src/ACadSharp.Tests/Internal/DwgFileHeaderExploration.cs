@@ -77,7 +77,7 @@ namespace ACadSharp.Tests.Internal
 				printVar(nameof(fh18.PageMapAddress), fh18.PageMapAddress);
 				printVar(nameof(fh18.SectionMapId), fh18.SectionMapId);
 				printVar(nameof(fh18.SectionArrayPageSize), fh18.SectionArrayPageSize);
-				printVar(nameof(fh18.RigthGap), fh18.RigthGap);
+				printVar(nameof(fh18.RightGap), fh18.RightGap);
 				printVar(nameof(fh18.LeftGap), fh18.LeftGap);
 				this._output.WriteLine("--- Descriptors:");
 				foreach (DwgSectionDescriptor descriptor in fh18.Descriptors.Values)
@@ -234,7 +234,7 @@ AcadVersion:AC1018
     PageMapAddress:81312
     SectionMapId:20
     SectionArrayPageSize:21
-    RigthGap:0
+    RightGap:0
     LeftGap:0
     --- Descriptors:
         Name:
