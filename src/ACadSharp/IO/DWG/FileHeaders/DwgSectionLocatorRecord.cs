@@ -45,7 +45,7 @@ namespace ACadSharp.IO.DWG
 
 		public override string ToString()
 		{
-			return $"Number : {this.Number} | Seeker : {this.Seeker} | Size : {this.Size}";
+			return $"Number : {this.Number} | Size : {this.Size} | Seeker : 0x{this.Seeker:x}";
 		}
 	}
 }

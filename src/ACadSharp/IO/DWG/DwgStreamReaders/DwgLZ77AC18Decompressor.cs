@@ -26,7 +26,7 @@ namespace ACadSharp.IO.DWG
 		}
 
 		/// <summary>
-		/// Decompress a compressed source stream.
+		/// Decompress a LZ77 compressed source stream.
 		/// </summary>
 		/// <param name="src">Source, compressed stream.</param>
 		/// <param name="dst">Destination, decompressed stream.</param>

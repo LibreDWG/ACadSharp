@@ -580,6 +580,7 @@ namespace ACadSharp.IO
 				{
 					record.Seeker = total;
 					fileheader.Records.Add(record.Number.Value, record);
+					this.triggerNotification($"Section {record.ToString()}", NotificationType.Info);
 				}
 				else
 				{
@@ -587,13 +588,14 @@ namespace ACadSharp.IO
 					//For a negative section number, the following data will be present after the section size:
 
 					//0x00	4	Parent
-					decompressed.ReadInt();
+					int parent = decompressed.ReadInt();
 					//0x04	4	Left
-					decompressed.ReadInt();
+					int left = decompressed.ReadInt();
 					//0x08	4	Right
-					decompressed.ReadInt();
+					int right = decompressed.ReadInt();
 					//0x0C	4	0x00
-					decompressed.ReadInt();
+					int x00 = decompressed.ReadInt();
+					this.triggerNotification($"Section {record.ToString()} {parent}, {left}, {right}, {x00}", NotificationType.Info);
 				}
 
 				total += (int)record.Size;
