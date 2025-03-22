@@ -24,11 +24,14 @@ namespace ACadSharp.IO
 
 		public Exception Exception { get; }
 
-		public NotificationEventArgs(string message, NotificationType notificationType = NotificationType.None, Exception exception = null)
+		public int LogLevel { get; }
+
+		public NotificationEventArgs(string message, NotificationType notificationType = NotificationType.None, int logLevel = 0, Exception exception = null)
 		{
 			this.Message = message;
 			this.NotificationType = notificationType;
 			this.Exception = exception;
+			this.LogLevel = logLevel;
 		}
 	}
 }

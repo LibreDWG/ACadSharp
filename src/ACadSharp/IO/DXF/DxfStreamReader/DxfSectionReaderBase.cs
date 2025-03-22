@@ -98,7 +98,7 @@ namespace ACadSharp.IO.DXF
 						template.OwnerHandle = this._reader.ValueAsHandle;
 						break;
 					default:
-						this._builder.Notify($"Unhandled dxf code {this._reader.Code} at line {this._reader.Position}.", NotificationType.None);
+					    this._builder.Notify($"Unhandled dxf code {this._reader.Code} at line {this._reader.Position}.", NotificationType.None, 0);
 						break;
 				}
 
@@ -1756,7 +1756,7 @@ namespace ACadSharp.IO.DXF
 				}
 				else
 				{
-					this._builder.Notify("An error occurred while assigning a property using mapper", NotificationType.Error, ex);
+					this._builder.Notify("An error occurred while assigning a property using mapper", NotificationType.Error, this._builder.Configuration.LogLevel, ex);
 				}
 			}
 

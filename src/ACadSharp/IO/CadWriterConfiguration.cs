@@ -31,5 +31,7 @@
 		/// default: true
 		/// </value>
 		public bool WriteXData { get; set; } = true;
+
+		public int LogLevel { get; set; } = 0;
 	}
 }

@@ -75,7 +75,7 @@ namespace ACadSharp.IO
 
 		protected void triggerNotification(string message, NotificationType notificationType, Exception ex = null)
 		{
-			this.triggerNotification(this, new NotificationEventArgs(message, notificationType, ex));
+			this.triggerNotification(this, new NotificationEventArgs(message, notificationType, this.Configuration.LogLevel, ex));
 		}
 
 		protected void triggerNotification(object sender, NotificationEventArgs e)

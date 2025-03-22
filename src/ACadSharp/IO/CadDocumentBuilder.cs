@@ -239,9 +239,9 @@ namespace ACadSharp.IO
 			this.BuildTable(this.BlockRecords);
 		}
 
-		public void Notify(string message, NotificationType notificationType = NotificationType.None, Exception exception = null)
+		public void Notify(string message, NotificationType notificationType = NotificationType.None, int logLevel = 0, Exception exception = null)
 		{
-			this.OnNotification?.Invoke(this, new NotificationEventArgs(message, notificationType, exception));
+			this.OnNotification?.Invoke(this, new NotificationEventArgs(message, notificationType, logLevel, exception));
 		}
 
 		public void BuildTable<T>(Table<T> table)

@@ -27,11 +27,11 @@ namespace ACadSharp.IO.Templates
 				}
 				catch (ArgumentException ex)
 				{
-					builder.Notify($"[{this.CadObject.SubclassMarker}] the entry {entry.Name} already exists", NotificationType.Error, ex);
+				    builder.Notify($"[{this.CadObject.SubclassMarker}] the entry {entry.Name} already exists", NotificationType.Error, 0, ex);
 				}
 				catch (Exception ex)
 				{
-					builder.Notify($"Error adding the entry [handle : {handle}] [type : {typeof(T)}]", NotificationType.Error, ex);
+				    builder.Notify($"Error adding the entry [handle : {handle}] [type : {typeof(T)}]", NotificationType.Error, 0, ex);
 				}
 			}
 		}

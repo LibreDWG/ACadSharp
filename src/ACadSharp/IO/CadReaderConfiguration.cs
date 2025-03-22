@@ -30,5 +30,7 @@
 		/// These NonGraphicalObjects do not contain any information and will be ignored by the writers.
 		/// </remarks>
 		public bool KeepUnknownNonGraphicalObjects { get; set; } = false;
+
+	        public int LogLevel  { get; set; } = 0;
 	}
 }

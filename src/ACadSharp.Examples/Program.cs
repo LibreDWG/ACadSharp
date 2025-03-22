@@ -36,8 +36,8 @@ namespace ACadSharp.Examples
 			}
 			if (args[i] == "-v")
 			{
-			    loglevel = int.Parse(args[i + 1]);
-			    i += 2;
+			    loglevel = 1; // int.Parse(args[i + 1]);
+			    i += 1;
 			}
 			if (args[i] == "-b")
 			{
@@ -53,6 +53,7 @@ namespace ACadSharp.Examples
 			{
 			    using (DwgReader reader = new DwgReader(file))
 			    {
+					reader.Configuration.LogLevel = loglevel;
 					reader.OnNotification += NotificationHelper.LogConsoleNotification;
 					doc = reader.Read();
 			    }
@@ -74,6 +75,7 @@ namespace ACadSharp.Examples
 			{
 			    using (DxfReader reader = new DxfReader(file))
 			    {
+					reader.Configuration.LogLevel = loglevel;
 					reader.OnNotification += NotificationHelper.LogConsoleNotification;
 					doc = reader.Read();
 			    }
