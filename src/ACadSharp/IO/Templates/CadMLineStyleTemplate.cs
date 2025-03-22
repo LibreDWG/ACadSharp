@@ -54,7 +54,7 @@ namespace ACadSharp.IO.Templates
 						catch (System.Exception ex)
 						{
 							//TODO: Implement get linetype by index
-							builder.Notify($"Linetype not assigned, index {LinetypeIndex}", NotificationType.Error, ex);
+							builder.Notify($"Linetype not assigned, index {LinetypeIndex}", NotificationType.Error, 0, ex);
 						}
 					}
 				}

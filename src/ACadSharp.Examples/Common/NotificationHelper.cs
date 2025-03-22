@@ -25,9 +25,11 @@ namespace ACadSharp.Examples.Common
 				default:
 					break;
 			}
-
-			//Write in the console all the messages
-			Console.WriteLine(e.Message);
+#if !DEBUG
+			if (e.NotificationType != NotificationType.Info)
+#endif
+				//Write in the console all the messages
+				Console.WriteLine(e.Message);
 			Console.ResetColor();
 		}
 	}

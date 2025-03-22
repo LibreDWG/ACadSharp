@@ -29,7 +29,7 @@ namespace ACadSharp.IO.DXF
 					if (!this._builder.Configuration.Failsafe)
 						throw;
 
-					this._builder.Notify($"Error while reading an entity at line {this._reader.Position}", NotificationType.Error, ex);
+					this._builder.Notify($"Error while reading an entity at line {this._reader.Position}", NotificationType.Error, 0, ex);
 
 					while (this._reader.DxfCode != DxfCode.Start)
 						this._reader.ReadNext();

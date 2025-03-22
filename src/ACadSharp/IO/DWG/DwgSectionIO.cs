@@ -93,7 +93,7 @@ namespace ACadSharp.IO.DWG
 
 		protected void notify(string message, NotificationType type, Exception ex = null)
 		{
-			this.OnNotification?.Invoke(this, new NotificationEventArgs(message, type, ex));
+			this.OnNotification?.Invoke(this, new NotificationEventArgs(message, type, 0, ex));
 		}
 	}
 }

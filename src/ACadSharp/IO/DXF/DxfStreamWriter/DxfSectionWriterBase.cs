@@ -206,7 +206,7 @@ namespace ACadSharp.IO.DXF
 
 		protected void notify(string message, NotificationType notificationType = NotificationType.None, Exception ex = null)
 		{
-			this.OnNotification?.Invoke(this, new NotificationEventArgs(message, notificationType, ex));
+		    this.OnNotification?.Invoke(this, new NotificationEventArgs(message, notificationType, this.Configuration.LogLevel, ex));
 		}
 	}
 }

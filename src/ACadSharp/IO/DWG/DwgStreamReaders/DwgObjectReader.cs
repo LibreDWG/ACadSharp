@@ -162,11 +162,11 @@ namespace ACadSharp.IO.DWG
 
 					if (this._classes.TryGetValue((short)type, out DxfClass dxf))
 					{
-						this._builder.Notify($"Could not read {dxf.DxfName} number {dxf.ClassNumber} with handle: {handle}", NotificationType.Error, ex);
+						this._builder.Notify($"Could not read {dxf.DxfName} number {dxf.ClassNumber} with handle: {handle}", NotificationType.Error, 0, ex);
 					}
 					else
 					{
-						this._builder.Notify($"Could not read {type} with handle: {handle}", NotificationType.Error, ex);
+						this._builder.Notify($"Could not read {type} with handle: {handle}", NotificationType.Error, 0, ex);
 					}
 
 					continue;
@@ -5217,7 +5217,7 @@ namespace ACadSharp.IO.DWG
 			}
 			catch (System.Exception ex)
 			{
-				this._builder.Notify($"Exception while reading LwPolyline: {ex.GetType().FullName}", NotificationType.Error, ex);
+				this._builder.Notify($"Exception while reading LwPolyline: {ex.GetType().FullName}", NotificationType.Error, 0, ex);
 				return template;
 			}
 
