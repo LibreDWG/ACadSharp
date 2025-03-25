@@ -116,6 +116,8 @@ namespace ACadSharp.Entities
 		/// </summary>
 		/// <param name="filename"></param>
 		/// <param name="patterns"></param>
+		/// <returns></returns>
+
 		///public static void SavePatterns(string filename, params IEnumerable<HatchPattern> patterns)
 		///{
 		///	using StreamWriter writer = File.CreateText(filename);

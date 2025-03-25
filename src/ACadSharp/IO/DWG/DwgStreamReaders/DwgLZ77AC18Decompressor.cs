@@ -32,6 +32,7 @@ namespace ACadSharp.IO.DWG
 		/// <param name="dst">Destination, decompressed stream.</param>
 		public static void DecompressToDest(Stream src, Stream dst)
 		{
+			DebugLog($"({dst.Position}) ");
 			int opcode1 = (byte)src.ReadByte();
 
 			if ((opcode1 & 0xF0) == 0)
@@ -40,6 +41,7 @@ namespace ACadSharp.IO.DWG
 			//0x11 : Terminates the input stream.
 			while (opcode1 != 0x11)
 			{
+				DebugLog($"\n({dst.Position}) -O {opcode1:x}");
 				//0x00 – 0x0F : Not used, because this would be mistaken for a Literal Length in some situations.
 
 				//Offset backwards from the current location in the decompressed data stream, where the “compressed” bytes should be copied from.
@@ -52,7 +54,9 @@ namespace ACadSharp.IO.DWG
 					compressedBytes = (opcode1 >> 4) - 1;
 					//Read the next byte(call it opcode2):
 					byte opcode2 = (byte)src.ReadByte();
+					DebugLog($"<O2 {opcode2:x}");
 					compOffset = ((opcode1 >> 2 & 3) | (opcode2 << 2)) + 1;
+					DebugLog($"o: {compressedBytes} {compOffset}");
 				}
 				//0x12 – 0x1F
 				else if (opcode1 < 0x20)
@@ -60,15 +64,18 @@ namespace ACadSharp.IO.DWG
 					compressedBytes = readCompressedBytes(opcode1, 0b0111, src);
 					compOffset = (opcode1 & 8) << 11;
 					opcode1 = twoByteOffset(ref compOffset, 0x4000, src);
+					DebugLog($"2bo: {compressedBytes} {compOffset}");
 				}
 				//0x20
 				else if (opcode1 >= 0x20)
 				{
 					compressedBytes = readCompressedBytes(opcode1, 0b00011111, src);
 					opcode1 = twoByteOffset(ref compOffset, 1, src);
+					DebugLog($"2bo: {compressedBytes} {compOffset}");
 				}
 
 				long position = dst.Position;
+				DebugLog($"co: {compressedBytes} {position - compOffset}->{position}");
 				for (long i = compressedBytes + position; position < i; ++position)
 				{
 					dst.Position = position - compOffset;
@@ -86,14 +93,16 @@ namespace ACadSharp.IO.DWG
 						litCount = literalCount(opcode1, src) + 3;
 				}
 
+				DebugLog($"L: {litCount}");
 				//Copy as literal
 				if (litCount > 0U)
 					opcode1 = copy(litCount, src, dst);
 			}
 		}
-		
+
 		private static byte copy(int count, Stream src, Stream dst)
 		{
+			DebugLog($">c {count} {src.Position}->{dst.Position}");
 			for (int i = 0; i < count; ++i)
 			{
 				byte b = (byte)src.ReadByte();
@@ -110,11 +119,14 @@ namespace ACadSharp.IO.DWG
 			if (lowbits == 0)
 			{
 				byte lastByte;
-				for (lastByte = (byte)src.ReadByte(); lastByte == 0; lastByte = (byte)src.ReadByte())
+				for (lastByte = (byte)src.ReadByte(); lastByte == 0; lastByte = (byte)src.ReadByte()) {
+				    DebugLog($"<L {lastByte}");
 					lowbits += byte.MaxValue;  //0xFF
+				}
 
 				lowbits += 0xF + lastByte;
 			}
+			DebugLog($">L {lowbits+3}");
 			return lowbits;
 		}
 
@@ -126,12 +138,15 @@ namespace ACadSharp.IO.DWG
 			{
 				byte lastByte;
 
-				for (lastByte = (byte)compressed.ReadByte(); lastByte == 0; lastByte = (byte)compressed.ReadByte())
+				for (lastByte = (byte)compressed.ReadByte(); lastByte == 0; lastByte = (byte)compressed.ReadByte()) {
+				    DebugLog($"<L {lastByte}");
 					compressedBytes += byte.MaxValue;
+				}
 
 				compressedBytes += lastByte + validBits;
 			}
 
+			DebugLog($">C {compressedBytes+2}");
 			return compressedBytes + 2;
 		}
 
@@ -145,5 +160,13 @@ namespace ACadSharp.IO.DWG
 
 			return firstByte;
 		}
+
+	    private static void DebugLog(string message)
+	    {
+#if DEBUG
+		System.Console.WriteLine(message);
+#endif
+	    }
 	}
+
 }

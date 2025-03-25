@@ -142,6 +142,8 @@ namespace ACadSharp.IO
 			if (this._fileHeader.AcadVersion < ACadVersion.AC1018)
 				return new CadSummaryInfo();
 
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine("Reading SummaryInfo");
 			IDwgStreamReader reader = this.getSectionStream(DwgSectionDefinition.SummaryInfo);
 			if (reader == null)
 				return new CadSummaryInfo();
@@ -165,6 +167,8 @@ namespace ACadSharp.IO
 			if (this._fileHeader.PreviewAddress < 0)
 				return null;
 
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine("Reading Preview");
 			IDwgStreamReader sectionHandler = DwgStreamReaderBase.GetStreamHandler(this._fileHeader.AcadVersion, this._fileStream.Stream);
 			sectionHandler.Position = this._fileHeader.PreviewAddress;
 
@@ -220,6 +224,8 @@ namespace ACadSharp.IO
 			CadHeader header = new CadHeader();
 			header.CodePage = CadUtils.GetCodePageName(this._fileHeader.DrawingCodePage);
 
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine("Reading Header");
 			IDwgStreamReader sreader = this.getSectionStream(DwgSectionDefinition.Header);
 
 			DwgHeaderReader hReader = new DwgHeaderReader(this._fileHeader.AcadVersion, sreader, header);
@@ -246,6 +252,8 @@ namespace ACadSharp.IO
 			ACadVersion version = CadUtils.GetVersionFromName(this._fileStream.ReadString(6, Encoding.ASCII));
 			DwgFileHeader fileHeader = DwgFileHeader.CreateFileHeader(version);
 
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine("Reading File Header");
 			//Get the stream reader
 			IDwgStreamReader sreader = DwgStreamReaderBase.GetStreamHandler(fileHeader.AcadVersion, this._fileStream.Stream);
 
@@ -300,6 +308,8 @@ namespace ACadSharp.IO
 		{
 			this._fileHeader = this._fileHeader ?? this.readFileHeader();
 
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine("Reading Classes");
 			IDwgStreamReader sreader = this.getSectionStream(DwgSectionDefinition.Classes);
 
 			var reader = new DwgClassesReader(this._fileHeader.AcadVersion, sreader, this._fileHeader);
@@ -310,6 +320,8 @@ namespace ACadSharp.IO
 
 		private void readAppInfo()
 		{
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine("Reading AppInfo");
 #if TEST
 			this._fileHeader = this._fileHeader ?? this.readFileHeader();
 
@@ -341,6 +353,8 @@ namespace ACadSharp.IO
 		{
 			this._fileHeader = this._fileHeader ?? this.readFileHeader();
 
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine("Reading Handles");
 			IDwgStreamReader sreader = this.getSectionStream(DwgSectionDefinition.Handles);
 
 			var handleReader = new DwgHandleReader(this._fileHeader.AcadVersion, sreader);
@@ -363,6 +377,8 @@ namespace ACadSharp.IO
 			if (this._fileHeader.AcadVersion < ACadVersion.AC1018)
 				return 0;
 
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine("Reading ObjFreeSpace");
 			IDwgStreamReader sreader = this.getSectionStream(DwgSectionDefinition.ObjFreeSpace);
 
 			//Int32				4	0
@@ -385,6 +401,8 @@ namespace ACadSharp.IO
 		{
 			this._fileHeader = this._fileHeader ?? this.readFileHeader();
 
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine("Reading Template");
 			IDwgStreamReader sreader = this.getSectionStream(DwgSectionDefinition.Template);
 
 			throw new NotImplementedException();
@@ -401,6 +419,8 @@ namespace ACadSharp.IO
 			Dictionary<ulong, long> handles = this.readHandles();
 			this._document.Classes = this.readClasses();
 
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine("Reading Objects");
 			IDwgStreamReader sreader = null;
 			if (this._fileHeader.AcadVersion <= ACadVersion.AC1015)
 			{
@@ -563,6 +583,8 @@ namespace ACadSharp.IO
 
 			//Get the page size
 			this.getPageHeaderData(sreader, out _, out long decompressedSize, out _, out _, out _);
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine($"DwgLZ77AC18Decompress {decompressedSize}");
 			//Get the descompressed stream to read the records
 			StreamIO decompressed = new StreamIO(DwgLZ77AC18Decompressor.Decompress(sreader.Stream, decompressedSize));
 
@@ -607,11 +629,15 @@ namespace ACadSharp.IO
 			sreader.Position = fileheader.Records[(int)fileheader.SectionMapId].Seeker;
 			//Get the page size
 			this.getPageHeaderData(sreader, out _, out decompressedSize, out _, out _, out _);
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine($"DwgLZ77AC18Decompress DataSectionMap {decompressedSize}");
 			StreamIO decompressedStream = new StreamIO(DwgLZ77AC18Decompressor.Decompress(sreader.Stream, decompressedSize));
 			decompressedStream.Encoding = TextEncoding.GetListedEncoding(CodePage.Windows1252);
 
 			//0x00	4	Number of section descriptions(NumDescriptions)
 			int ndescriptions = decompressedStream.ReadInt<LittleEndianConverter>();
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine($"\n{ndescriptions} sections:");
 			//0x04	4	0x02 (long)
 			decompressedStream.ReadInt<LittleEndianConverter>();
 			//0x08	4	0x00007400 (long)
@@ -648,6 +674,8 @@ namespace ACadSharp.IO
 				descriptor.Encrypted = decompressedStream.ReadInt<LittleEndianConverter>();
 				//0x20	64	Section Name(string)
 				descriptor.Name = decompressedStream.ReadString(64).Split('\0')[0];
+				if (this.Configuration.LogLevel > 0)
+				    System.Console.WriteLine($"Section[{i}] {descriptor.CompressedSize} {descriptor.PageCount} {descriptor.DecompressedSize} {descriptor.CompressedCode} {descriptor.SectionId} {descriptor.Encrypted} {descriptor.Name}");
 
 				//Following this, the following (local) section page map data will be present
 				for (int j = 0; j < descriptor.PageCount; ++j)
@@ -663,6 +691,8 @@ namespace ACadSharp.IO
 					//same decompressed size and seeker (temporal values)
 					localmap.DecompressedSize = descriptor.DecompressedSize;
 					localmap.Seeker = fileheader.Records[localmap.PageNumber].Seeker;
+					if (this.Configuration.LogLevel > 0)
+					    System.Console.WriteLine($"  Section Page[{localmap.PageNumber}] {localmap.CompressedSize} {localmap.Offset} {localmap.DecompressedSize} {localmap.Seeker}");
 
 					//Maximum section page size appears to be 0x7400 bytes in the normal case.
 					//If a logical section of the file (the database objects, for example) exceeds this size, then it is broken up into pages of size 0x7400.
@@ -701,6 +731,8 @@ namespace ACadSharp.IO
 			compressionType = sreader.ReadRawLong();
 			//0x10	4	Section page checksum
 			checksum = sreader.ReadRawLong();
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine($"Page 0x{sectionType:x} {decompressedSize} {compressedSize} {compressionType} {checksum:X}");
 		}
 
 		/// <summary>
@@ -1112,6 +1144,8 @@ namespace ACadSharp.IO
 		private void decryptDataSection(DwgLocalSectionMap section, IDwgStreamReader sreader)
 		{
 			int secMask = 0x4164536B ^ (int)sreader.Position;
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine($"decrypt page[{section.PageNumber}] size={section.DecompressedSize}");
 
 			//0x00	4	Section page type, since it’s always a data section: 0x4163043b
 			var pageType = sreader.ReadRawLong() ^ secMask;
