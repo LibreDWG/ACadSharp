@@ -976,7 +976,7 @@ namespace ACadSharp.IO
 		/// <param name="sreader"></param>
 		private void readFileMetaData(DwgFileHeaderAC18 fileheader, IDwgStreamReader sreader)
 		{
-			//5 bytes of 0x00 
+			//5 bytes of 0x00
 			sreader.Advance(5);
 
 			//0x0B	1	Maintenance release version
@@ -994,7 +994,7 @@ namespace ACadSharp.IO
 			fileheader.DrawingCodePage = CadUtils.GetCodePage(sreader.ReadShort());
 			this._encoding = sreader.Encoding = getListedEncoding((int)fileheader.DrawingCodePage);
 
-			//Advance empty bytes 
+			//Advance empty bytes
 			//0x15	3	3 0x00 bytes
 			sreader.Advance(3);
 
@@ -1156,15 +1156,15 @@ namespace ACadSharp.IO
 			//0x0C	4	Page Size (decompressed)
 			section.PageSize = sreader.ReadRawLong() ^ secMask;
 			//0x10	4	Start Offset (in the decompressed buffer)
-			var startOffset = sreader.ReadRawLong() ^ secMask;
-			//0x14	4	Page header Checksum (section page checksum calculated from unencoded header bytes, with the data checksum as seed)
-			var checksum = sreader.ReadRawLong() ^ secMask;
-			section.Offset = (ulong)(checksum + startOffset);
-
-			//0x18	4	Data Checksum (section page checksum calculated from compressed data bytes, with seed 0)
-			section.Checksum = (uint)(sreader.ReadRawLong() ^ secMask);
-			//0x1C	4	Unknown (ODA writes a 0)
-			var oda = (uint)(sreader.ReadRawLong() ^ secMask);
+			section.Offset = (ulong)(sreader.ReadRawLong() ^ secMask);
+			//0x14	4	Unknown (ODA writes a 0)
+			section.ODA = (uint)(sreader.ReadRawLong() ^ secMask);
+			//0x18	4	Page header Checksum (section page checksum calculated from unencoded header bytes, with the data checksum as seed)
+			section.CRC = (ulong)(sreader.ReadRawLong() ^ secMask);
+			//0x1C	4	Data Checksum (section page checksum calculated from compressed data bytes, with seed 0)
+			section.Checksum = (ulong)(sreader.ReadRawLong() ^ secMask);
+			if (this.Configuration.LogLevel > 0)
+			    System.Console.WriteLine($"  page[{section.PageNumber}]: type={pageType:x} secNum={sectionNumber} ComprSize={section.CompressedSize} PageSize={section.PageSize} off={section.Offset} unknown={section.ODA} page_crc={(uint)section.CRC:X} data_crc={(uint)section.Checksum:X}");
 		}
 
 		private Stream getSectionBuffer21(DwgFileHeaderAC21 fileheader, string sectionName)

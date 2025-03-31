@@ -7,6 +7,9 @@ namespace ACadSharp.IO.DWG
 	/// </summary>
 	internal static class DwgLZ77AC18Decompressor
 	{
+#if DEBUG
+		private static int counter = 0;
+#endif
 		/// <summary>
 		/// Decompress a stream with a specific decompressed size.
 		/// </summary>
@@ -21,7 +24,15 @@ namespace ACadSharp.IO.DWG
 			//Decompress the stream
 			DecompressToDest(compressed, memoryStream);
 			memoryStream.Position = 0L;
-
+#if DEBUG
+			string filePath = $"decomp_{counter}.bin";
+			counter++;
+			using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+			{
+			    memoryStream.CopyTo(fileStream);
+				memoryStream.Position = 0L;
+			}
+#endif
 			return memoryStream;
 		}
 
