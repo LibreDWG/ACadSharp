@@ -1286,13 +1286,13 @@ namespace ACadSharp.IO
 			uint totalSize = (uint)(v1 * correctionFactor);
 
 			int factor = (int)(totalSize + blockSize - 1L) / blockSize;
-			int lenght = factor * byte.MaxValue;
+			int length = factor * byte.MaxValue;
 
-			byte[] buffer = new byte[lenght];
+			byte[] buffer = new byte[length];
 
 			//Relative to data page map 1, add 0x480 to get stream position
 			stream.Position = (long)(0x480 + pageOffset);
-			stream.Read(buffer, 0, lenght);
+			stream.Read(buffer, 0, length);
 
 			byte[] compressedData = new byte[(int)totalSize];
 			this.reedSolomonDecoding(buffer, compressedData, factor, blockSize);
