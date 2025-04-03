@@ -87,9 +87,19 @@ namespace ACadSharp.IO.DWG
 
 				long position = dst.Position;
 				DebugLog($"co: {compressedBytes} {position - compOffset}->{position}");
-				for (long i = compressedBytes + position; position < i; ++position)
+#if DEBUG
+				if (compressedBytes == 29036) {
+				    DebugLog($"assert {position + compressedBytes} < {dst.Length}");
+				}
+#endif
+				for (long end = compressedBytes + position; position < end; ++position)
 				{
 					dst.Position = position - compOffset;
+#if DEBUG
+					if (compressedBytes == 29036) {
+					    DebugLog($"{position}: {dst.Position} < {dst.Length}");
+					}
+#endif
 					byte value = (byte)dst.ReadByte();
 					dst.Position = position;
 					dst.WriteByte(value);
@@ -131,7 +141,7 @@ namespace ACadSharp.IO.DWG
 			{
 				byte lastByte;
 				for (lastByte = (byte)src.ReadByte(); lastByte == 0; lastByte = (byte)src.ReadByte()) {
-				    DebugLog($"<L {lastByte}");
+					DebugLog($"<L {lastByte}");
 					lowbits += byte.MaxValue;  //0xFF
 				}
 

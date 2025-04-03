@@ -741,249 +741,333 @@ namespace ACadSharp.IO.DWG
 			switch (type)
 			{
 				case ObjectType.UNDEFINED:
+					DebugLog($"Read UNDEFINED @{this._objectReader.Position}");
 					break;
 				case ObjectType.TEXT:
+					DebugLog($"Read TEXT @{this._objectReader.Position}");
 					template = this.readText();
 					break;
 				case ObjectType.ATTRIB:
+					DebugLog($"Read ATTRIB @{this._objectReader.Position}");
 					template = this.readAttribute();
 					break;
 				case ObjectType.ATTDEF:
+					DebugLog($"Read ATTDEF @{this._objectReader.Position}");
 					template = this.readAttributeDefinition();
 					break;
 				case ObjectType.BLOCK:
+					DebugLog($"Read BLOCK @{this._objectReader.Position}");
 					template = this.readBlock();
 					break;
 				case ObjectType.ENDBLK:
+					DebugLog($"Read ENDBLK @{this._objectReader.Position}");
 					template = this.readEndBlock();
 					break;
 				case ObjectType.SEQEND:
+					DebugLog($"Read SEQEND @{this._objectReader.Position}");
 					template = this.readSeqend();
 					break;
 				case ObjectType.INSERT:
+					DebugLog($"Read INSERT @{this._objectReader.Position}");
 					template = this.readInsert();
 					break;
 				case ObjectType.MINSERT:
+					DebugLog($"Read MINSERT @{this._objectReader.Position}");
 					template = this.readMInsert();
 					break;
 				case ObjectType.UNKNOW_9:
+					DebugLog($"Skip UNKNOW_9 (old TRACE r10-r11) @{this._objectReader.Position}");
 					break;
 				case ObjectType.VERTEX_2D:
+					DebugLog($"Read VERTEX_2D @{this._objectReader.Position}");
 					template = this.readVertex2D();
 					break;
 				case ObjectType.VERTEX_3D:
+					DebugLog($"Read VERTEX_3D @{this._objectReader.Position}");
 					template = this.readVertex3D(new Vertex3D());
 					break;
 				case ObjectType.VERTEX_MESH:
+					DebugLog($"Skip VERTEX_MESH @{this._objectReader.Position}");
 					break;
 				case ObjectType.VERTEX_PFACE:
+					DebugLog($"Read VERTEX_PFACE @{this._objectReader.Position}");
 					template = this.readVertex3D(new VertexFaceMesh());
 					break;
 				case ObjectType.VERTEX_PFACE_FACE:
+					DebugLog($"Read VERTEX_PFACE_FACE @{this._objectReader.Position}");
 					template = this.readPfaceVertex();
 					break;
 				case ObjectType.POLYLINE_2D:
+					DebugLog($"Read POLYLINE_2D @{this._objectReader.Position}");
 					template = this.readPolyline2D();
 					break;
 				case ObjectType.POLYLINE_3D:
+					DebugLog($"Read POLYLINE_3D @{this._objectReader.Position}");
 					template = this.readPolyline3D();
 					break;
 				case ObjectType.ARC:
+					DebugLog($"Read ARC @{this._objectReader.Position}");
 					template = this.readArc();
 					break;
 				case ObjectType.CIRCLE:
+					DebugLog($"Read CIRCLE @{this._objectReader.Position}");
 					template = this.readCircle();
 					break;
 				case ObjectType.LINE:
+					DebugLog($"Read LINE @{this._objectReader.Position}");
 					template = this.readLine();
 					break;
 				case ObjectType.DIMENSION_ORDINATE:
+					DebugLog($"Read DIMENSION_ORDINATE @{this._objectReader.Position}");
 					template = this.readDimOrdinate();
 					break;
 				case ObjectType.DIMENSION_LINEAR:
+					DebugLog($"Read DIMENSION_LINEAR @{this._objectReader.Position}");
 					template = this.readDimLinear();
 					break;
 				case ObjectType.DIMENSION_ALIGNED:
+					DebugLog($"Read DIMENSION_ALIGNED @{this._objectReader.Position}");
 					template = this.readDimAligned();
 					break;
 				case ObjectType.DIMENSION_ANG_3_Pt:
+					DebugLog($"Read DIMENSION_ANG_3_Pt @{this._objectReader.Position}");
 					template = this.readDimAngular3pt();
 					break;
 				case ObjectType.DIMENSION_ANG_2_Ln:
+					DebugLog($"Read DIMENSION_ANG_2_Ln @{this._objectReader.Position}");
 					template = this.readDimLine2pt();
 					break;
 				case ObjectType.DIMENSION_RADIUS:
+					DebugLog($"Read DIMENSION_RADIUS @{this._objectReader.Position}");
 					template = this.readDimRadius();
 					break;
 				case ObjectType.DIMENSION_DIAMETER:
+					DebugLog($"Read DIMENSION_DIAMETER @{this._objectReader.Position}");
 					template = this.readDimDiameter();
 					break;
 				case ObjectType.POINT:
+					DebugLog($"Read POINT @{this._objectReader.Position}");
 					template = this.readPoint();
 					break;
 				case ObjectType.FACE3D:
+					DebugLog($"Read 3DFACE @{this._objectReader.Position}");
 					template = this.read3dFace();
 					break;
 				case ObjectType.POLYLINE_PFACE:
+					DebugLog($"Read POLYLINE_PFACE @{this._objectReader.Position}");
 					template = this.readPolyfaceMesh();
 					break;
 				case ObjectType.POLYLINE_MESH:
+					DebugLog($"Read POLYLINE_MESH @{this._objectReader.Position}");
 					template = this.readPolylineMesh();
 					break;
 				case ObjectType.SOLID:
 				case ObjectType.TRACE:
+					DebugLog($"Read TRACE @{this._objectReader.Position}");
 					template = this.readSolid();
 					break;
 				case ObjectType.SHAPE:
+					DebugLog($"Read SHAPE @{this._objectReader.Position}");
 					template = this.readShape();
 					break;
 				case ObjectType.VIEWPORT:
+					DebugLog($"Read VIEWPORT @{this._objectReader.Position}");
 					template = this.readViewport();
 					break;
 				case ObjectType.ELLIPSE:
+					DebugLog($"Read ELLIPSE @{this._objectReader.Position}");
 					template = this.readEllipse();
 					break;
 				case ObjectType.SPLINE:
+					DebugLog($"Read SPLINE @{this._objectReader.Position}");
 					template = this.readSpline();
 					break;
 				case ObjectType.REGION:
+					DebugLog($"Skip REGION @{this._objectReader.Position}");
 					break;
 				case ObjectType.SOLID3D:
+					DebugLog($"Skip 3DSOLID @{this._objectReader.Position}");
 					break;
 				case ObjectType.BODY:
+					DebugLog($"Skip BODY @{this._objectReader.Position}");
 					break;
 				case ObjectType.RAY:
+					DebugLog($"Read RAY @{this._objectReader.Position}");
 					template = this.readRay();
 					break;
 				case ObjectType.XLINE:
+					DebugLog($"Read XLINE @{this._objectReader.Position}");
 					template = this.readXLine();
 					break;
 				case ObjectType.DICTIONARY:
+					DebugLog($"Read DICTIONARY @{this._objectReader.Position}");
 					template = this.readDictionary();
 					break;
 				case ObjectType.OLEFRAME:
+					DebugLog($"Skip OLEFRAME @{this._objectReader.Position}");
 					break;
 				case ObjectType.MTEXT:
+					DebugLog($"Read MTEXT @{this._objectReader.Position}");
 					template = this.readMText();
 					break;
 				case ObjectType.LEADER:
+					DebugLog($"Read LEADER @{this._objectReader.Position}");
 					template = this.readLeader();
 					break;
 				case ObjectType.TOLERANCE:
+					DebugLog($"Read TOLERANCE @{this._objectReader.Position}");
 					template = this.readTolerance();
 					break;
 				case ObjectType.MLINE:
+					DebugLog($"Read MLINE @{this._objectReader.Position}");
 					template = this.readMLine();
 					break;
 				case ObjectType.BLOCK_CONTROL_OBJ:
+					DebugLog($"Read BLOCK_CONTROL @{this._objectReader.Position}");
 					template = this.readBlockControlObject();
 					this._builder.BlockRecords = (BlockRecordsTable)template.CadObject;
 					break;
 				case ObjectType.BLOCK_HEADER:
+					DebugLog($"Read BLOCK_HEADER @{this._objectReader.Position}");
 					template = this.readBlockHeader();
 					break;
 				case ObjectType.LAYER_CONTROL_OBJ:
+					DebugLog($"Read LAYER_CONTROL @{this._objectReader.Position}");
 					template = this.readDocumentTable(new LayersTable());
 					this._builder.Layers = (LayersTable)template.CadObject;
 					break;
 				case ObjectType.LAYER:
+					DebugLog($"Read LAYER @{this._objectReader.Position}");
 					template = this.readLayer();
 					break;
 				case ObjectType.STYLE_CONTROL_OBJ:
+					DebugLog($"Read STYLE_CONTROL @{this._objectReader.Position}");
 					template = this.readDocumentTable(new TextStylesTable());
 					this._builder.TextStyles = (TextStylesTable)template.CadObject;
 					break;
 				case ObjectType.STYLE:
+					DebugLog($"Read STYLE @{this._objectReader.Position}");
 					template = this.readTextStyle();
 					break;
 				case ObjectType.UNKNOW_36:
+					DebugLog($"Skip UNKNOW_36 @{this._objectReader.Position}");
 					break;
 				case ObjectType.UNKNOW_37:
+					DebugLog($"Skip UNKNOW_37 @{this._objectReader.Position}");
 					break;
 				case ObjectType.LTYPE_CONTROL_OBJ:
+					DebugLog($"Read LTYPE_CONTROL @{this._objectReader.Position}");
 					template = this.readLTypeControlObject();
 					this._builder.LineTypesTable = (LineTypesTable)template.CadObject;
 					break;
 				case ObjectType.LTYPE:
+					DebugLog($"Read LTYPE @{this._objectReader.Position}");
 					template = this.readLType();
 					break;
 				case ObjectType.UNKNOW_3A:
+					DebugLog($"Skip UNKNOW_3A @{this._objectReader.Position}");
 					break;
 				case ObjectType.UNKNOW_3B:
+					DebugLog($"Skip UNKNOW_3B @{this._objectReader.Position}");
 					break;
 				case ObjectType.VIEW_CONTROL_OBJ:
+					DebugLog($"Read VIEW_CONTROL @{this._objectReader.Position}");
 					template = this.readDocumentTable(new ViewsTable());
 					this._builder.Views = (ViewsTable)template.CadObject;
 					break;
 				case ObjectType.VIEW:
+					DebugLog($"Read VIEW @{this._objectReader.Position}");
 					template = this.readView();
 					break;
 				case ObjectType.UCS_CONTROL_OBJ:
+					DebugLog($"Read UCS_CONTROL @{this._objectReader.Position}");
 					template = this.readDocumentTable(new UCSTable());
 					this._builder.UCSs = (UCSTable)template.CadObject;
 					break;
 				case ObjectType.UCS:
+					DebugLog($"Read UCS @{this._objectReader.Position}");
 					template = this.readUcs();
 					break;
 				case ObjectType.VPORT_CONTROL_OBJ:
+					DebugLog($"Read VPORT_CONTROL @{this._objectReader.Position}");
 					template = this.readDocumentTable(new VPortsTable());
 					this._builder.VPorts = (VPortsTable)template.CadObject;
 					break;
 				case ObjectType.VPORT:
+					DebugLog($"Read VPORT @{this._objectReader.Position}");
 					template = this.readVPort();
 					break;
 				case ObjectType.APPID_CONTROL_OBJ:
+					DebugLog($"Read APPID_CONTROL @{this._objectReader.Position}");
 					template = this.readDocumentTable(new AppIdsTable());
 					this._builder.AppIds = (AppIdsTable)template.CadObject;
 					break;
 				case ObjectType.APPID:
+					DebugLog($"Read APPID @{this._objectReader.Position}");
 					template = this.readAppId();
 					break;
 				case ObjectType.DIMSTYLE_CONTROL_OBJ:
+					DebugLog($"Read DIMSTYLE_CONTROL @{this._objectReader.Position}");
 					template = this.readDocumentTable(new DimensionStylesTable());
 					this._builder.DimensionStyles = (DimensionStylesTable)template.CadObject;
 					break;
 				case ObjectType.DIMSTYLE:
+					DebugLog($"Read DIMSTYLE @{this._objectReader.Position}");
 					template = this.readDimStyle();
 					break;
 				case ObjectType.VP_ENT_HDR_CTRL_OBJ:
+					DebugLog($"Read VP_ENT_HDR_CTRL @{this._objectReader.Position}");
 					template = this.readViewportEntityControl();
 					break;
 				case ObjectType.VP_ENT_HDR:
+					DebugLog($"Read VP_ENT_HDR @{this._objectReader.Position}");
 					template = this.readViewportEntityHeader();
 					break;
 				case ObjectType.GROUP:
+					DebugLog($"Read GROUP @{this._objectReader.Position}");
 					template = this.readGroup();
 					break;
 				case ObjectType.MLINESTYLE:
+					DebugLog($"Read MLINESTYLE @{this._objectReader.Position}");
 					template = this.readMLineStyle();
 					break;
 				case ObjectType.OLE2FRAME:
+					DebugLog($"Skip OLE2FRAME @{this._objectReader.Position}");
 					break;
 				case ObjectType.DUMMY:
+					DebugLog($"Skip DUMMY @{this._objectReader.Position}");
 					break;
 				case ObjectType.LONG_TRANSACTION:
+					DebugLog($"Skip LONG_TRANSACTION @{this._objectReader.Position}");
 					break;
 				case ObjectType.LWPOLYLINE:
+					DebugLog($"Read LWPOLYLINE @{this._objectReader.Position}");
 					template = this.readLWPolyline();
 					break;
 				case ObjectType.HATCH:
+					DebugLog($"Read HATCH @{this._objectReader.Position}");
 					template = this.readHatch();
 					break;
 				case ObjectType.XRECORD:
+					DebugLog($"Read XRECORD @{this._objectReader.Position}");
 					template = this.readXRecord();
 					break;
 				case ObjectType.ACDBPLACEHOLDER:
+					DebugLog($"Read ACDBPLACEHOLDER @{this._objectReader.Position}");
 					template = this.readPlaceHolder();
 					break;
 				case ObjectType.VBA_PROJECT:
+					DebugLog($"Skip VBA_PROJECT @{this._objectReader.Position}");
 					break;
 				case ObjectType.LAYOUT:
+					DebugLog($"Read LAYOUT @{this._objectReader.Position}");
 					template = this.readLayout();
 					break;
 				case ObjectType.ACAD_PROXY_ENTITY:
+					DebugLog($"Skip ACAD_PROXY_ENTITY @{this._objectReader.Position}");
 					break;
 				case ObjectType.ACAD_PROXY_OBJECT:
+					DebugLog($"Skip ACAD_PROXY_OBJECT @{this._objectReader.Position}");
 					break;
 				default:
 					return this.readUnlistedType((short)type);
@@ -1001,6 +1085,8 @@ namespace ACadSharp.IO.DWG
 				return null;
 
 			CadTemplate template = null;
+			if (this._builder.Configuration.LogLevel > 0)
+				System.Console.WriteLine($"Read {c.DxfName} @{this._objectReader.Position}");
 
 			switch (c.DxfName)
 			{
@@ -1068,9 +1154,11 @@ namespace ACadSharp.IO.DWG
 				case "SORTENTSTABLE":
 					template = this.readSortentsTable();
 					break;
-				//case "VISUALSTYLE":
-				//	template = this.readVisualStyle();
-				//	break;
+#if DEBUG
+				case "VISUALSTYLE":
+					template = this.readVisualStyle();
+					break;
+#endif
 				case "WIPEOUT":
 					template = this.readCadImage(new Wipeout());
 					break;
@@ -1117,9 +1205,12 @@ namespace ACadSharp.IO.DWG
 
 			//DXF fields 96, 97 contain the value 5, here are three fields returning the same value 5
 			evaluationGraph.Value96 = this._objectReader.ReadBitLong();
+			DebugLog($"Value96: {evaluationGraph.Value96} [BL 96] @{this._objectReader.Position}");
 			evaluationGraph.Value97 = this._objectReader.ReadBitLong();
+			DebugLog($"Value97: {evaluationGraph.Value97} [BL 96] @{this._objectReader.Position}");
 
 			int nodeCount = this._objectReader.ReadBitLong();
+			DebugLog($"nodeCount: {nodeCount} [BL 0] @{this._objectReader.Position}");
 			for (int i = 0; i < nodeCount; i++)
 			{
 				var nodeTemplate = new CadEvaluationGraphTemplate.GraphNodeTemplate();
@@ -1128,24 +1219,33 @@ namespace ACadSharp.IO.DWG
 
 				//Code 91
 				node.Index = this._objectReader.ReadBitLong();
+				DebugLog($"node[{i}].Index: {node.Index} [BL 91] @{this._objectReader.Position}");
 				//Code 93
 				node.Flags = this._objectReader.ReadBitLong();
+				DebugLog($"node[{i}].Flags: {node.Flags} [BL 93] @{this._objectReader.Position}");
 				//Code 95
 				node.NextNodeIndex = this._objectReader.ReadBitLong();
+				DebugLog($"node[{i}].NextNodeIndex: {node.NextNodeIndex} [BL 95] @{this._objectReader.Position}");
 
 				//Code 360
 				nodeTemplate.ExpressionHandle = this.handleReference();
+				DebugLog($"node[{i}].ExpressionHandle: {nodeTemplate.ExpressionHandle} [H 360] @{this._objectReader.Position}");
 
 				//Codes 92, x4
 				node.Data1 = this._objectReader.ReadBitLong();
+				DebugLog($"node[{i}].Data1: {node.Data1} [BL 92] @{this._objectReader.Position}");
 				node.Data2 = this._objectReader.ReadBitLong();
+				DebugLog($"node[{i}].Data2: {node.Data2} [BL 92] @{this._objectReader.Position}");
 				node.Data3 = this._objectReader.ReadBitLong();
+				DebugLog($"node[{i}].Data3: {node.Data3} [BL 92] @{this._objectReader.Position}");
 				node.Data4 = this._objectReader.ReadBitLong();
+				DebugLog($"node[{i}].Data4: {node.Data4} [BL 92] @{this._objectReader.Position}");
 			}
 
 			//Last node has x5 92 with the last value as 0 instead of x4
 			//Followed by a 93
 			var edgeCount = this._objectReader.ReadBitLong();
+			DebugLog($"edgeCount: {edgeCount} [BL 0] @{this._objectReader.Position}");
 			for (int i = 0; i < edgeCount; i++)
 			{
 				//id BL, DXF 92
@@ -1156,21 +1256,31 @@ namespace ACadSharp.IO.DWG
 				//out_edge BLd
 
 				//92 id
-				this._objectReader.ReadBitLong();
+				var id = this._objectReader.ReadBitLong();
+				DebugLog($"edge[{i}].id: {id} [BL 92] @{this._objectReader.Position}");
 				//93 
-				this._objectReader.ReadBitLong();
+				var nextid = this._objectReader.ReadBitLong();
+				DebugLog($"edge[{i}].nextid: {nextid} [BL 93] @{this._objectReader.Position}");
 				//94
-				this._objectReader.ReadBitLong();
+				var e1 = this._objectReader.ReadBitLong();
+				DebugLog($"edge[{i}].e1: {e1} [BL 94] @{this._objectReader.Position}");
 				//91
-				this._objectReader.ReadBitLong();
+				var e2 = this._objectReader.ReadBitLong();
+				DebugLog($"edge[{i}].e3: {e2} [BL 91] @{this._objectReader.Position}");
 				//91
-				this._objectReader.ReadBitLong();
+				var e3 = this._objectReader.ReadBitLong();
+				DebugLog($"edge[{i}].e3: {e3} [BL 91] @{this._objectReader.Position}");
 				//92 x6
-				this._objectReader.ReadBitLong();
-				this._objectReader.ReadBitLong();
-				this._objectReader.ReadBitLong();
-				this._objectReader.ReadBitLong();
-				this._objectReader.ReadBitLong();
+				var out_e1 = this._objectReader.ReadBitLong();
+				DebugLog($"edge[{i}].out_e1: {out_e1} [BL 92] @{this._objectReader.Position}");
+				var out_e2 = this._objectReader.ReadBitLong();
+				DebugLog($"edge[{i}].out_e2: {out_e2} [BL 92] @{this._objectReader.Position}");
+				var out_e3 = this._objectReader.ReadBitLong();
+				DebugLog($"edge[{i}].out_e3: {out_e3} [BL 92] @{this._objectReader.Position}");
+				var out_e4 = this._objectReader.ReadBitLong();
+				DebugLog($"edge[{i}].out_e4: {out_e4} [BL 92] @{this._objectReader.Position}");
+				var out_e5 = this._objectReader.ReadBitLong();
+				DebugLog($"edge[{i}].out_e5: {out_e5} [BL 92] @{this._objectReader.Position}");
 			}
 
 			return template;
@@ -1182,19 +1292,24 @@ namespace ACadSharp.IO.DWG
 
 			//AcDbEvalExpr
 			var unknown = this._objectReader.ReadBitLong();
+			DebugLog($"EvalExpr.unknown: {unknown} [BL 0] @{this._objectReader.Position}");
 			Debug.Assert(unknown == -1);
 
 			//98
 			template.CadObject.Value98 = this._objectReader.ReadBitLong();
+			DebugLog($"EvalExpr.Value98: {template.CadObject.Value98} [BL 98] @{this._objectReader.Position}");
 			//99
 			template.CadObject.Value99 = this._objectReader.ReadBitLong();
+			DebugLog($"EvalExpr.Value99: {template.CadObject.Value98} [BL 99] @{this._objectReader.Position}");
 
 			//-9999 always the same value
 			short n9999 = this._mergedReaders.ReadBitShort();
+			DebugLog($"EvalExpr.n9999: {n9999} [BS 0] @{this._objectReader.Position}");
 			Debug.Assert(n9999 == -9999);
 
 			//90
 			template.CadObject.Value90 = this._objectReader.ReadBitLong();
+			DebugLog($"EvalExpr.Value90: {template.CadObject.Value90} [BL 90] @{this._objectReader.Position}");
 		}
 
 		private void readBlockElement(CadBlockElementTemplate template)
@@ -1203,12 +1318,16 @@ namespace ACadSharp.IO.DWG
 
 			//300 name
 			template.BlockElement.ElementName = this._mergedReaders.ReadVariableText();
+			DebugLog($"BlockElement.ElementName: {template.BlockElement.ElementName} [TV 300] @{this._objectReader.Position}");
 			//98
 			template.BlockElement.Value98 = this._mergedReaders.ReadBitLong();
+			DebugLog($"BlockElement.Value98: {template.BlockElement.Value98} [BL 98] @{this._objectReader.Position}");
 			//99
 			template.BlockElement.Value99 = this._mergedReaders.ReadBitLong();
+			DebugLog($"BlockElement.Value99: {template.BlockElement.Value99} [BL 99] @{this._objectReader.Position}");
 			//1071
 			template.BlockElement.Value1071 = this._mergedReaders.ReadBitLong();
+			DebugLog($"BlockElement.Value1071: {template.BlockElement.Value1071} [BL 1071] @{this._objectReader.Position}");
 		}
 
 		private void readBlockParameter(CadBlockParameterTemplate template)
@@ -1217,8 +1336,10 @@ namespace ACadSharp.IO.DWG
 
 			//280
 			template.BlockParameter.Value280 = this._mergedReaders.ReadBit();
+			DebugLog($"BlockParameter.Value280: {template.BlockParameter.Value280} [B 280] @{this._objectReader.Position}");
 			//281
 			template.BlockParameter.Value281 = this._mergedReaders.ReadBit();
+			DebugLog($"BlockParameter.Value281: {template.BlockParameter.Value281} [B 281] @{this._objectReader.Position}");
 		}
 
 		private void readBlock1PtParameter(CadBlock1PtParameterTemplate template)
@@ -1227,13 +1348,17 @@ namespace ACadSharp.IO.DWG
 
 			//1010 1020 1030
 			template.Block1PtParameter.Location = this._mergedReaders.Read3BitDouble();
+			DebugLog($"Block1PtParameter.Location: {template.Block1PtParameter.Location} [3BD 1010] @{this._objectReader.Position}");
 
 			//170
 			template.Block1PtParameter.Value170 = this._mergedReaders.ReadBitShort();
+			DebugLog($"Block1PtParameter.Value170: {template.Block1PtParameter.Value170} [BS 170] @{this._objectReader.Position}");
 			//171
 			template.Block1PtParameter.Value171 = this._mergedReaders.ReadBitShort();
+			DebugLog($"Block1PtParameter.Value171: {template.Block1PtParameter.Value171} [BS 170] @{this._objectReader.Position}");
 			//93
 			template.Block1PtParameter.Value93 = this._mergedReaders.ReadBitLong();
+			DebugLog($"Block1PtParameter.Value93: {template.Block1PtParameter.Value93} [BL 93] @{this._objectReader.Position}");
 		}
 
 		private CadTemplate readBlockVisibilityParameter()
@@ -2798,22 +2923,26 @@ namespace ACadSharp.IO.DWG
 			this.readCommonNonEntityData(template);
 
 			//Common:
-			//Numitems L number of dictonary items
+			//Numitems L number of dictionary items
 			int nentries = this._objectReader.ReadBitLong();
+			DebugLog($"nentries: {nentries} @{this._objectReader.Position}");
 
 			//R14 Only:
 			if (this._version == ACadVersion.AC1014)
 			{
 				//Unknown R14 RC Unknown R14 byte, has always been 0
 				byte zero = this._objectReader.ReadByte();
+				DebugLog($"zero: {zero} [RC] @{this._objectReader.Position}");
 			}
 			//R2000 +:
 			if (this.R2000Plus)
 			{
 				//Cloning flag BS 281
 				template.CadObject.CloningFlags = (DictionaryCloningFlags)this._objectReader.ReadBitShort();
+				DebugLog($"CloningFlags: {template.CadObject.CloningFlags} [BS 281] @{this._objectReader.Position}");
 				//Hard Owner flag RC 280
 				template.CadObject.HardOwnerFlag = this._objectReader.ReadByte() > 0;
+				DebugLog($"HardOwnerFlag: {template.CadObject.HardOwnerFlag} [RC 280] @{this._objectReader.Position}");
 			}
 
 			//Common:
@@ -2821,11 +2950,13 @@ namespace ACadSharp.IO.DWG
 			{
 				//Text TV string name of dictionary entry, numitems entries
 				string name = this._textReader.ReadVariableText();
+				DebugLog($"name[{i}]:   {name} [TV] @{this._textReader.Position}");
 				//Handle refs H parenthandle (soft relative pointer)
 				//[Reactors(soft pointer)]
 				//xdicobjhandle(hard owner)
 				//itemhandles (soft owner)
 				ulong handle = this.handleReference();
+				DebugLog($"handle[{i}]: {handle} [H] @{this._handlesReader.Position}");
 
 				if (handle == 0 || string.IsNullOrEmpty(name))
 					continue;
@@ -2842,10 +2973,12 @@ namespace ACadSharp.IO.DWG
 			this.readCommonNonEntityData(template);
 
 			//Intval RC an integer value
-			this._objectReader.ReadByte();
+			int intval = this._objectReader.ReadByte();
+			DebugLog($"intval: {intval} [RC] @{this._objectReader.Position}");
 
 			//BS a string
 			dictvar.Value = this._textReader.ReadVariableText();
+			DebugLog($"string: {dictvar.Value} [TV] @{this._textReader.Position}");
 
 			return template;
 		}
@@ -2869,23 +3002,29 @@ namespace ACadSharp.IO.DWG
 
 			//Insertion pt3 BD 10 First picked point. (Location relative to text depends on attachment point (71).)
 			mtext.InsertPoint = this._objectReader.Read3BitDouble();
+			DebugLog($"InsertPoint: {mtext.InsertPoint} [3BD 10] @{this._objectReader.Position}");
 			//Extrusion 3BD 210 Undocumented; appears in DXF and entget, but ACAD doesn't even bother to adjust it to unit length.
 			mtext.Normal = this._objectReader.Read3BitDouble();
+			DebugLog($"Normal: {mtext.Normal} [3BD 210] @{this._objectReader.Position}");
 			//X-axis dir 3BD 11 Apparently the text x-axis vector. (Why not just a rotation?) ACAD maintains it as a unit vector.
 			mtext.AlignmentPoint = this._objectReader.Read3BitDouble();
+			DebugLog($"AlignmentPoint: {mtext.AlignmentPoint} [3BD 11] @{this._objectReader.Position}");
 			//Rect width BD 41 Reference rectangle width (width picked by the user).
 			mtext.RectangleWidth = this._objectReader.ReadBitDouble();
+			DebugLog($"RectangleWidth: {mtext.RectangleWidth} [BD 41] @{this._objectReader.Position}");
 
 			//R2007+:
 			if (this.R2007Plus)
 			{
 				//Rect height BD 46 Reference rectangle height.
 				mtext.RectangleHeight = this._objectReader.ReadBitDouble();
+				DebugLog($"RectangleHeight: {mtext.RectangleHeight} [BD 46] @{this._objectReader.Position}");
 			}
 
 			//Common:
 			//Text height BD 40 Undocumented
 			mtext.Height = this._objectReader.ReadBitDouble();
+			DebugLog($"Height: {mtext.Height} [BD 40] @{this._objectReader.Position}");
 			//Attachment BS 71 Similar to justification; see DXF doc
 			mtext.AttachmentPoint = (AttachmentPointType)this._objectReader.ReadBitShort();
 			//Drawing dir BS 72 Left to right, etc.; see DXF doc
@@ -6062,6 +6201,13 @@ namespace ACadSharp.IO.DWG
 			}
 
 			return template;
+		}
+
+		private void DebugLog(String message) {
+#if DEBUG
+			if (this._builder.Configuration.LogLevel > 0)
+				System.Console.WriteLine(message);
+#endif
 		}
 	}
 }
