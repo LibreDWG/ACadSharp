@@ -116,7 +116,7 @@ namespace ACadSharp.IO.DXF
 			this._writer.Write(DxfCode.Subclass, DxfSubclassMarker.Dictionary);
 
 			this._writer.Write(280, e.HardOwnerFlag);
-			this._writer.Write(281, (int)e.ClonningFlags);
+			this._writer.Write(281, (int)e.CloningFlags);
 
 			foreach (NonGraphicalObject item in e)
 			{

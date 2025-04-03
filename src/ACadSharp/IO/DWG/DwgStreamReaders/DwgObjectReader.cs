@@ -2811,7 +2811,7 @@ namespace ACadSharp.IO.DWG
 			if (this.R2000Plus)
 			{
 				//Cloning flag BS 281
-				template.CadObject.ClonningFlags = (DictionaryCloningFlags)this._objectReader.ReadBitShort();
+				template.CadObject.CloningFlags = (DictionaryCloningFlags)this._objectReader.ReadBitShort();
 				//Hard Owner flag RC 280
 				template.CadObject.HardOwnerFlag = this._objectReader.ReadByte() > 0;
 			}

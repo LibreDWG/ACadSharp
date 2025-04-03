@@ -188,7 +188,7 @@ namespace ACadSharp.IO.DWG
 			if (this.R2000Plus)
 			{
 				//Cloning flag BS 281
-				this._writer.WriteBitShort((short)dictionary.ClonningFlags);
+				this._writer.WriteBitShort((short)dictionary.CloningFlags);
 				this._writer.WriteByte((byte)(dictionary.HardOwnerFlag ? 1u : 0u));
 			}
 

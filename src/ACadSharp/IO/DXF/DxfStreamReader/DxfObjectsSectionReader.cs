@@ -458,7 +458,7 @@ namespace ACadSharp.IO.DXF
 					cadDictionary.HardOwnerFlag = this._reader.ValueAsBool;
 					return true;
 				case 281:
-					cadDictionary.ClonningFlags = (DictionaryCloningFlags)this._reader.Value;
+					cadDictionary.CloningFlags = (DictionaryCloningFlags)this._reader.Value;
 					return true;
 				case 3:
 					tmp.Entries.Add(this._reader.ValueAsString, null);

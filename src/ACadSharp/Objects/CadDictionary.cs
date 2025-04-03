@@ -129,7 +129,7 @@ namespace ACadSharp.Objects
 		/// Duplicate record cloning flag (determines how to merge duplicate entries)
 		/// </summary>
 		[DxfCodeValue(281)]
-		public DictionaryCloningFlags ClonningFlags { get; set; }
+		public DictionaryCloningFlags CloningFlags { get; set; }
 
 		/// <summary>
 		/// Entry names
